@@ -126,7 +126,7 @@
         </div>
         <div class="modal-body">
 			
-			 <form  action="purchase_invoice_insert.php" method="post" class="form-horizontal form-label-left">
+			<form  action="purchase_invoice_insert.php" method="post" class="form-horizontal form-label-left">
             
                 <div class="form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12"> Distributers Name <span class="required">*</span>
@@ -152,14 +152,13 @@
                           <input type="date" name="date" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                 </div>					
-
 			    <div class="form-group">
 				    <label class="control-label col-md-3 col-sm-3 col-xs-12">Amount Paid<span class="required">*</span></label>
 					<div class="col-md-7 col-sm-7 col-xs-12">
 						<input type="text" name="amount_paid" placeholder="Amount Paid"required="required" class="form-control col-md-7 col-xs-12">
 				    </div>
-			  </div>
-			   <div class="form-group">
+			    </div>
+			    <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Amount Payable<span class="required">*</span></label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                          <input type="text" name="amount_payable"class="form-control col-md-7 col-xs-12" placeholder="Amount Payable"required="required" >
@@ -184,7 +183,7 @@
 						    <button type="button" class="btn btn-danger " data-dismiss="modal" class="cancelbtn">Cancel</button>
 						  <br>
                         </div>
-                      </div>					  
+                </div>					  
            </form>
         </div>
       </div>

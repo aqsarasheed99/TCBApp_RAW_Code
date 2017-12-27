@@ -6,6 +6,7 @@
 			  $invoice_id =$_GET["invoice_id"] ;
 			   }
 		?>
+		<div id="displayData"></div>
 		
         <!-- page content -->
         <div class="right_col" role="main">
@@ -52,7 +53,7 @@
                   <div class="x_content"><br/>
 			<div class="col-md-12">
 				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
+					<table id="example1" class="table table-striped table-bordered dt-responsive nowrap">
 						<thead>
 						<tr >
 						  <th style="text-align:center">Purchase Invoice Id</th>
@@ -119,15 +120,14 @@
 </div>
 </div>
  <!-- Modal content-->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+  <div class="modal fade" id="myModal" role="dialog" >
+    <div class="modal-dialog" style=" width: 950px;margin: auto;">
       <div class="modal-content">
         <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<h3 class="modal-title" align="center">Add Products</h3>
         </div>
-			<div class="modal-body">
-			
+			<div class="modal-body" >
 			 <form  action="" method="post" class="form-horizontal form-label-left">
                 <div class="form-group">
 					<label class="control-label col-md-4 col-sm-4 col-xs-12"> Products Name <span class="required">*</span>
@@ -142,23 +142,24 @@
 									<option	value="<?php echo $fetch["id"]; ?>">
 												   <?php echo $fetch["product_name"]; ?>	
 									</option>
+									
 									<?php } ?>
 						    </select>
+							
                       </div>
 			    </div>
-				
 				<div class="form-group">
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">Expiry Starting Date <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                            <input type="date" name="expiry_starting" id="expiry_starting" required="required" class="form-control col-md-6">
+                            <input type="date" name="expiry_starting" id="expiry_starting_date" placeholder="Expiry Starting Date" required="required" class="form-control col-md-6">
                         </div>
                 </div>					
 
 			    <div class="form-group">
 				    <label class="control-label col-md-4 col-sm-4 col-xs-12">Expiry Ending Date <span class="required">*</span></label>
 					<div class="col-md-7 col-sm-7 col-xs-12">
-					<input type="date" name="expiry_ending" id="expiry_ending" required="required" class="form-control col-md-6">
+					<input type="date" name="expiry_ending" id="expiry_ending_date" placeholder="Expiry Ending Date" required="required" class="form-control col-md-6">
 					</div>
 			    </div>
 			  
@@ -175,17 +176,25 @@
                          <input type="text" name="sale_price" id="sale_price" placeholder="Sale Price"required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                  </div>
+				<div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">IMEI <span class="required">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <input type="text" name="imei" id="imei" value= "" onchange="imeiFunction();"
+							       placeholder="IMEI" required="required" class="form-control col-md-6">
+                        </div>
+                </div>	
 					 
                 <div class="form-group">
                         <div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4"><br/>
-						    <button type="submit" id="table_heading" class="btn btn-success btn-block" >Display</button>
+							<button  id="table_heading" class="btn btn-success btn-block" onclick="insert();"> Display </button>
 						  <br>
                         </div>
                 </div>					  
             </form>
-			<!-- table start tha print the headings and the remaining part of table are defined in the end of this page -->
+			<!-- table start that print the headings and the remaining part of table are defined in the end of this page -->
 		<div id="mydata">
-			<table  border="2"  id="myTableData" cellpadding="2" style="color:black;">
+			<table  id="myTableData" class="table table-striped table-bordered dt-responsive nowrap" align ="center" width="70%">
 				<tr>
 					<th> Index_No              </th>
 					<th> Product_Name          </th>
@@ -198,15 +207,17 @@
 			</table>
 			<br/>
 		</div>
-		
 		<script>
-			
+			//this method print the table heading
 			$("#table_heading").click(function(){
 				$("#mydata").show();
 			});
+			
 			let val;
 			let invoiceId;
+			
 			invoiceId = <?php echo $invoice_id ;?>
+			       
 			//product_per_invoice code
 			//Arrays are declare
 			let productIdArr = new Array();
@@ -227,18 +238,18 @@
 			{  
 					val = getImeiValue();
 					imeiArr.push(val);  
-					document.getElementById("imei").value = "";
-					
+					document.getElementById("imei").value = "";	
 			}
+			
 			function insert()
 			{
 				//get the value from the "form" through specific id that are define in form fields then store in variable
-				productId      = document.getElementById("product_id").value;
+				productId      = document.getElementById("product_name").value;
 				expStarting      = document.getElementById("expiry_starting_date").value;
 				expEnding        = document.getElementById("expiry_ending_date").value;
 				purchasePrice    = document.getElementById("purchase_price").value;
 				salePrice        = document.getElementById("sale_price").value;
-	
+			
 				// push is the method of array in javascript ,..and this method push the new value in array 
 					productIdArr.push(productId);
 					expStartingArr.push(expStarting);
@@ -246,8 +257,8 @@
 					purchasePriceArr.push(purchasePrice); 
 					salePriceArr.push(salePrice);
 					imeiArr.push(imei);
-				   
-					let table = document.getElementById("myTableData");
+					
+				let table = document.getElementById("myTableData");
 					
 					//count the table row
 					let rowCount = table.rows.length;
@@ -263,7 +274,7 @@
 					row.insertCell(4).innerHTML= purchasePrice;	 
 					row.insertCell(5).innerHTML= salePrice;	 
 					row.insertCell(6).innerHTML= val;	
-			val = null;					
+			val = null;	
 			}
 			let product,expS, expE, pPrice, sPrice,imeiNo;
 			function objVariables(){
@@ -274,21 +285,19 @@
 						sPrice = salePriceArr;
 						imeiNo = imeiArr;			
 			}	
-		
-			//let model = JSON.stringify(mobileArr);		
+			let model = JSON.stringify(mobileArr);		
 				$(document).ready(function(){
 					$('#click').click(function(){
 					        $.ajax({
 							url:"products_ajax_request.php",
 							method: "POST",
-							data: { invoice_id:invoiceId, product_id:product, exp_starting:expS, exp_ending:expE, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo },
+							data: { invoice_id:invoiceId, product_id:product,exp_starting:expS, exp_ending:expE, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo },
                             success:function(message){
 								$('#displayData').html(message);
 							}
 							}); 						
 				        }); // click event
 				});// ready 
-		
 		    </script>
 			
         </div> 

@@ -29,7 +29,6 @@
 				}
 			  }
 			  
-			  
 		//products per invoice read query
 			  	public function readProductsPerInvoice($invoice_id){
 				$stmt = $this->conn->prepare("SELECT product.product_name,product.id,invoice.purchase_invoice_id, invoice.product_id,invoice.imei,invoice.expiry_starting_date,invoice.expiry_ending_date,invoice.purchase_price,
@@ -40,6 +39,14 @@
 					return $result;
 				}
 		}	
+		//read product name against id
+			public function readProductName($product_id){
+				$stmt = $this->conn->prepare("SELECT product_name FROM products WHERE id=$product_id") or die($this->conn->error);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					return $result;
+				}
+			}  
 		 // delete department
 		public function delete_department($department_id){
 			$delete = "DELETE FROM department WHERE id = {$department_id}";
