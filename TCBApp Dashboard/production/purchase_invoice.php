@@ -44,34 +44,31 @@
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content"><br/>
-				  <?php echo message(); ?>
-			<div class="col-md-12">
-				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
-						<thead>
-						<tr >
-						  <th style="text-align:center">Invoice Id</th>
-						  <th style="text-align:center">Distributor Name</th>
-						  <th style="text-align:center">Date</th>
-						  <th style="text-align:center">Amount Paid</th>
-						  <th style="text-align:center">Amount Payable</th>
-						  <th style="text-align:center">Discount Received</th>
-						  <th style="text-align:center">Net Total</th>
-						  <th style="text-align:center">Update</th>
-						  <th style="text-align:center">Remove</th>
+                </div>
+				<div class="x_content">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr >
+						  <th>Invoice Id</th>
+						  <th>Distributor Name</th>
+						  <th>Date</th>
+						  <th>Amount Paid</th>
+						  <th>Amount Payable</th>
+						  <th>Discount Received</th>
+						  <th>Net Total</th>
+						  <th>Update</th>
+						  <th>Remove</th>
 						</tr>
-						</thead>
-						<tbody>
-						 <?php include_once 'purchase_invoice_crud.php';?>
+                      </thead>
+                      <tbody>
+                         <?php include_once 'purchase_invoice_crud.php';?>
 							 <?php 
 							   $conn = new crudop();
 							   $read = $conn->read();
 							   while($fetch = $read->fetch_array()){
 							 ?>
 							<tr>	
-								<td align="center"><a href= "products_per_invoice.php?invoice_id=<?php echo $fetch['id']?>">Invoice:
+								<td align="center"><a href= "products_per_purchase_invoice.php?invoice_id=<?php echo $fetch['id']?>">Invoice:
 								<?php echo $fetch['id'];?>
 								</a>						
 								</td>
@@ -103,18 +100,15 @@
 						<?php
 							}
 						?>	
-						</tbody>
-					</table>
-			        </div>
+                      </tbody>
+                    </table>	
+                    </div>     
 			    </div>	
-				
 		    </div>
 		</div>
 	</div>
 </div>
-</div>
-</div>
-<!--model -->
+ <!--model -->
  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -190,5 +184,5 @@
     </div>
   </div> 
 </div>
-<!--model content close -->
+<!--model content close --> 
 <?php include_once ('footer.php'); ?>        

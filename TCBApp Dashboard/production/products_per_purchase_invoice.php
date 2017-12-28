@@ -1,5 +1,5 @@
 <?php include_once ('header.php'); ?>
-<?php include 'products_per_invoice_crud.php';?> 
+<?php include 'products_per_purchase_invoice_crud.php';?> 
  
         <?php if (isset($_GET["invoice_id"])) 
 			  {
@@ -50,25 +50,23 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content"><br/>
-			<div class="col-md-12">
-				<div class="box-body">
-					<table id="example1" class="table table-striped table-bordered dt-responsive nowrap">
-						<thead>
-						<tr >
-						  <th style="text-align:center">Purchase Invoice Id</th>
-						  <th style="text-align:center">Products Name</th>
-						  <th style="text-align:center">IMEI</th>
-						  <th style="text-align:center">Expiry Starting Date</th>
-						  <th style="text-align:center">Expiry Ending Date</th>
-						  <th style="text-align:center">Purchase price</th>
-						  <th style="text-align:center">Sale Price</th>
-						  <th style="text-align:center">Update</th>
-						  <th style="text-align:center">Remove</th>
+                  <div class="x_content">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr >
+						  <th>Purchase Invoice Id</th>
+						  <th>Products Name</th>
+						  <th>IMEI</th>
+						  <th>Expiry Starting Date</th>
+						  <th>Expiry Ending Date</th>
+						  <th>Purchase price</th>
+						  <th>Sale Price</th>
+						  <th>Update</th>
+						  <th>Remove</th>
 						</tr>
-						</thead>
-						<tbody>
-							 <?php 
+                      </thead>
+                      <tbody>
+                         <?php 
 							   $conn = new crudop();
 							   $read = $conn->readProductsPerInvoice($invoice_id);
 							   while($fetch = $read->fetch_array()){
@@ -92,7 +90,7 @@
 								<td align="center"><?php echo $fetch['sale_price'];?>						
 								</td>
 								<td align="center">
-									<a href="edit_department.php?department_id=<?php echo $fetch['id'];?>" >
+									<a href="edit_products_per_purchase_invoice.php?purchase_invoice_id = <?php echo $invoice_id; ?>">
 										<i class="glyphicon glyphicon-edit"></i> 
 										</a>
 									</td>
@@ -106,14 +104,9 @@
 						<?php
 							}
 						?>	
-						</tbody>
-						
-					</table>
-	
-			        </div>
-			    </div>	
-				
-		    </div>
+                      </tbody>
+                    </table>	
+                    </div>
 		</div>
 	</div>
 </div>
@@ -145,7 +138,6 @@
 									
 									<?php } ?>
 						    </select>
-							
                       </div>
 			    </div>
 				<div class="form-group">
@@ -187,8 +179,9 @@
 					 
                 <div class="form-group">
                         <div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4"><br/>
-							<button  id="table_heading" class="btn btn-success btn-block" onclick="insert();"> Display </button>
-						  <br>
+							<button  id="table_heading" class="btn btn-success btn-md" onclick="insert();"> Display </button>
+							<input type="button" name="submit" class="btn btn-success btn-md" id="submit"  value="Submit" onclick="objVariables();" />
+						    <br>
                         </div>
                 </div>					  
             </form>
@@ -196,12 +189,12 @@
 		<div id="mydata">
 			<table  id="myTableData" class="table table-striped table-bordered dt-responsive nowrap" align ="center" width="70%">
 				<tr>
-					<th> Index_No              </th>
-					<th> Product_Name          </th>
-					<th> Expiry_starting       </th>
-					<th> Expiry_ending         </th>
-					<th> Purchase_price        </th>
-					<th> Selling_price         </th>
+					<th> Index No              </th>
+					<th> Product Name          </th>
+					<th> Expiry Starting       </th>
+					<th> Expiry Ending         </th>
+					<th> Purchase Price        </th>
+					<th> Selling Price         </th>
 					<th> IMEI                  </th>
 				</tr>
 			</table>
@@ -264,7 +257,7 @@
 					let rowCount = table.rows.length;
 					
 					//insert the new row
-					let row = table.insertRow(rowCount);
+					let row = table.insertRow(1);
 					
 					//insert the coulmn against the row
 					row.insertCell(0).innerHTML= rowCount;
@@ -284,16 +277,16 @@
 						pPrice = purchasePriceArr;
 						sPrice = salePriceArr;
 						imeiNo = imeiArr;			
-			}	
-			let model = JSON.stringify(mobileArr);		
+			}			
 				$(document).ready(function(){
-					$('#click').click(function(){
+					$('#submit').click(function(){
 					        $.ajax({
 							url:"products_ajax_request.php",
 							method: "POST",
-							data: { invoice_id:invoiceId, product_id:product,exp_starting:expS, exp_ending:expE, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo },
+							data: {invoice_id:invoiceId, product_id:product,exp_starting:expS, exp_ending:expE, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo },
                             success:function(message){
-								$('#displayData').html(message);
+								//$('#displayData').html(message);
+								alert(message);
 							}
 							}); 						
 				        }); // click event
@@ -303,6 +296,5 @@
         </div> 
         </div>
     </div>
-</div>
-       
+</div>     
 <?php include_once ('footer.php'); ?>        
