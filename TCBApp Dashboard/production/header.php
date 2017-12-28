@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,9 +7,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
+=======
+
+>>>>>>> f4d021cd73e57f71a5e04280997adb18cbdb5546
 
     <title>Gentelella Alela! | </title>
 
@@ -27,12 +32,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-	<style>
-		#mydata{
-			display:none;
-		}
-	</style>
-</head>
+
 
   <body class="nav-md">
     <div class="container body">
