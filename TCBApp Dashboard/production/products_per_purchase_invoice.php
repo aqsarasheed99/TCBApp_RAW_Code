@@ -6,8 +6,6 @@
 			  $invoice_id =$_GET["invoice_id"] ;
 			   }
 		?>
-		<div id="displayData"></div>
-		
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -156,6 +154,12 @@
 			    </div>
 			  
 			    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Discount<span class="required">*</span></label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                         <input type="text" name="discount" id="discount" placeholder="discount" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                 </div>
+				 <div class="form-group">
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">Purchase Price<span class="required">*</span></label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                          <input type="text" name="purchase_price" id="purchase_price" placeholder="Purchase Price"required="required" class="form-control col-md-7 col-xs-12">
@@ -172,11 +176,11 @@
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">IMEI <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                            <input type="text" name="imei" id="imei" value= "" onchange="imeiFunction();"
-							       placeholder="IMEI" required="required" class="form-control col-md-6">
+                            <input type="number" maxlength="15" name="imei" id="imei" value= "" onchange="imeiFunction();"
+							       placeholder="IMEI" required="required" data-inputmask="'mask' : '999999999999999'" class="form-control col-md-6">
+								    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                         </div>
-                </div>	
-					 
+                </div>				
                 <div class="form-group">
                         <div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4"><br/>
 							<button  id="table_heading" class="btn btn-success btn-md" onclick="insert();"> Display </button>
@@ -249,7 +253,7 @@
 					expEndingArr.push(expEnding);
 					purchasePriceArr.push(purchasePrice); 
 					salePriceArr.push(salePrice);
-					imeiArr.push(imei);
+					//imeiArr.push(imei);
 					
 				let table = document.getElementById("myTableData");
 					
@@ -269,24 +273,28 @@
 					row.insertCell(6).innerHTML= val;	
 			val = null;	
 			}
+			
 			let product,expS, expE, pPrice, sPrice,imeiNo;
 			function objVariables(){
 			            product = productIdArr;
-						expS = expStartingArr;
-						expE = expEndingArr;
-						pPrice = purchasePriceArr;
-						sPrice = salePriceArr;
-						imeiNo = imeiArr;			
+						expS    = expStartingArr;
+						expE    = expEndingArr;
+						pPrice  = purchasePriceArr;
+						sPrice  = salePriceArr;
+						imeiNo  = imeiArr;	
 			}			
+				
 				$(document).ready(function(){
 					$('#submit').click(function(){
+						
 					        $.ajax({
 							url:"products_ajax_request.php",
 							method: "POST",
-							data: {invoice_id:invoiceId, product_id:product,exp_starting:expS, exp_ending:expE, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo },
-                            success:function(message){
-								//$('#displayData').html(message);
-								alert(message);
+							data:{invoice_id:invoiceId,product_id:product,exp_starting:expS,exp_ending:expE,purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo},
+                            success:function(message)
+							{
+								//alert(message);
+								$(".modal-title").html(message);
 							}
 							}); 						
 				        }); // click event

@@ -7,7 +7,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Distributor</h3>
+                <h3>Distributor Record</h3>
               </div>
 
               <div class="title_right">
@@ -29,7 +29,8 @@
                 <div class="x_panel">
 				    <?php echo message();?>
                   <div class="x_title">
-                    <h2>Distributor Record</h2>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> + Add Distributer 
+					</button>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -47,9 +48,8 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-				  
-
                   <div class="x_content"><br/>
+				    <?php echo message();?>
 				  <!-- table to display the record of all distributors-->
                       <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -105,5 +105,76 @@
           </div>
         </div>
         <!-- /page content -->
+		<!--model -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title" align="center">Add Distributer</h3>
+        </div>
+        <div class="modal-body">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="insert_distributor.php">
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="name" id="name" required="required" class="form-control col-md-7 col-xs-12" placeholder="Enter Name">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> Father Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="father_name" id="father_name" required="required" class="form-control col-md-7 col-xs-12" placeholder="Enter Father Name">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">CNIC</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="cnic" class="form-control" data-inputmask="'mask' : '99999-9999999-9'">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone No.</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="phone_no" class="form-control"   data-inputmask="'mask' : '(+99)999-9999999'">
+                          <span class="fa fa-user form-control-feedback right"  aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Address<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" name="address" rows="3" placeholder='Enter Address'></textarea>
+                        </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+						  <button type="submit" class="btn btn-success">Submit</button>
+                          <button class="btn btn-danger" type="button">Cancel</button>
+                          <button class="btn btn-primary" type="reset">Reset</button>
+                          
+                        </div>
+                      </div>
+
+                    </form>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+<!--model content close --> 
 
 <?php include_once ('footer.php'); ?>        

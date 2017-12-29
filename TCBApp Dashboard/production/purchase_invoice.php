@@ -21,7 +21,6 @@
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -56,6 +55,7 @@
 						  <th>Amount Payable</th>
 						  <th>Discount Received</th>
 						  <th>Net Total</th>
+						  <th>Comment</th>
 						  <th>Update</th>
 						  <th>Remove</th>
 						</tr>
@@ -85,6 +85,8 @@
 								<td align="center"><?php echo $fetch['discount_received'];?>						
 								</td>
 								<td align="center"><?php echo $fetch['net_total'];?>						
+								</td>
+								<td align="center"><?php echo $fetch['comment'];?>						
 								</td>
 								<td align="center">
 									<a href="edit_department.php?department_id=<?php echo $fetch['id'];?>" >
@@ -168,6 +170,13 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Net Total<span class="required">*</span></label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
                         <input type="text" name="net_total" id="net_total"class="form-control col-md-7 col-xs-12" placeholder="Net Total" required="required">                     
+						</div>
+                      </div> 
+					  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Comment<span class="required">*</span></label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                        <textarea name="comment" id="comment"class="form-control col-md-7 col-xs-12" required="required"> 
+						</textarea>                    
 						</div>
                       </div> 
                 <div class="form-group">

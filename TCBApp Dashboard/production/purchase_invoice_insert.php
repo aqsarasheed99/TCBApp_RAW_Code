@@ -8,8 +8,9 @@
 			$amount_payable = $_POST['amount_payable'];
 			$discount_received = $_POST['discount_received'];	
 			$net_total= $_POST['net_total'];
+			$comment= $_POST['comment'];
 				
 		//insert query
 		$insert = new crudop();
-		$insert->insert($distributer_id,$date,$amount_paid,$amount_payable, $discount_received,$net_total);
+		$insert->insert($distributer_id,$date,$amount_paid,$amount_payable, $discount_received,$net_total,$comment);
 ?>

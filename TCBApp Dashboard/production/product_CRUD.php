@@ -1,7 +1,6 @@
-  <?php  
+  <?php  include_once 'session.php';
          include_once 'db_connection.php';
 	     include_once 'function.php';
-		 include_once 'session.php';
      
         class crudOp extends db_connection{
 			
@@ -18,11 +17,11 @@
 			 if($insert){
 				//Success
 			   $_SESSION["message"] = "Product created successfully.";
-			   echo '<script>window.location="products.php"; </script>';
+			   echo '<script>window.location="products_record.php"; </script>';
 					} else {
 				//Failure
 				  $_SESSION["message"] = "Product creation failed.";
-				  echo '<script>window.location="products.php"; </script>';
+				  echo '<script>window.location="products_record.php"; </script>';
 					 }
 			}
 			//fetch whole data from products table 
@@ -33,7 +32,7 @@
 				return $result;
 			    }
 		     }
-		  // delete department selected product
+		  // delete product selected product
 		  public function delete_product($product_id){
 				$delete = "DELETE FROM products WHERE id = {$product_id}";
 				$deleted = $this->conn->query($delete);
@@ -55,19 +54,19 @@
 				return $result;
 			      }
 			  }
-		 // update department
+		 // update product
 		public function update($product_id,$product_name,$manufacturer){
 			$updates = "UPDATE  products SET product_name = '{$product_name}', manufacturer='{$manufacturer}' WHERE id = {$product_id}";
 			$update = $this->conn->query($updates);
 
 			 if($update){
 					//Success
-				$_SESSION["message"] = "Product Edit Successfully.";
-				echo '<script>window.location="products_record.php"; </script>';
-					} else {
+				$_SESSION["message"] = "Product Deleted Successfully.";
+			    echo '<script>window.location="products_record.php"; </script>';
+				  } else {
 					//Failure
-				$_SESSION["message"] = "Product Edit Failed.";
-				echo '<script>window.location="products_record.php"; </script>';
+					$_SESSION["message"] = "Product Deleted  Failed.";
+				    echo '<script>window.location="products_record.php"; </script>';
 					}
 				  }
 	}
