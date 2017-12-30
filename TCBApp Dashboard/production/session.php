@@ -1,18 +1,14 @@
 <?php
-
 	session_start();
 	function message() {
 		if (isset($_SESSION["message"])) {
-				$output = "<div class=\"alert alert-success col-md-12\" style=\"text-align:center\">";
+				$output = "<div class=\"alert alert-success\"  style = \"text-align:center\">";
 				$output .= htmlentities($_SESSION["message"]);
 				$output .= "</div>";
-				
 				$_SESSION["message"] = null;
 				return $output;
 			}
 	}
-
-	
 	function errors() {
 		if (isset($_SESSION["errors"])) {
 			$errors = $_SESSION["errors"];

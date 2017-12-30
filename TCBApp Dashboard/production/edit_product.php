@@ -1,5 +1,7 @@
-<?php 
-      include_once ('header.php'); 
+      
+<?php  include_once 'session.php';?>
+<?php include_once ('header.php'); 
+
       include_once ('product_CRUD.php'); 
 ?>
 	 <?php   if (isset($_GET["product_id"])) {

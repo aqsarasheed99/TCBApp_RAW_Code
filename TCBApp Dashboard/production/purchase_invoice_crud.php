@@ -1,38 +1,49 @@
  <?php 
-    include_once 'db_connection.php';
-    include_once 'function.php';
+
+     include_once 'db_connection.php';
+		include_once 'function.php';
+     include_once 'session.php';
+
 	    
 		class crudop extends db_connection{
 			
 		public function __construct(){
 			 $this->connect();
 			    }
-		public function insert($distributer_id,$date,$amount_paid,$amount_payable, $discount_received,$net_total)
-		{
-			$distributer = "INSERT INTO purchase_invoice VALUES(null,$distributer_id,'$date',$amount_paid,$amount_payable, $discount_received,$net_total)";
-			$insert = $this->conn->query($distributer);
-			 if($insert){
-					//Success
-						$_SESSION["message"] = "Invoice insert successfully.";
-						echo '<script>window.location="purchase_invoice.php"; </script>';
-					} else {
-					//Failure
-					  $_SESSION["message"] = "Failed.";
-					   	echo '<script>window.location="purchase_invoice.php"; </script>';
-		            }
-		}
+
 		
 		public function read(){
 				$stmt = $this->conn->prepare("SELECT distributer.name,distributer.id,
 				purchase.id,purchase.date,purchase.amount_paid,purchase.amount_payable,
 				purchase.discount_received,purchase.net_total FROM distributors AS distributer INNER JOIN purchase_invoice AS purchase ON distributer.id=purchase.distributer_id ORDER BY purchase.id DESC") or die($this->conn->error);
+
+		public function insert($distributer_id,$date,$comment)
+		{
+			$distributer = "INSERT INTO purchase_invoice VALUES(null,$distributer_id,'$date','$comment')";
+			$insert = $this->conn->query($distributer);
+			  if($insert){
+						//Success
+					  $_SESSION["message"] = "invoice created successfully.";
+					   echo '<script>window.location="purchase_invoice.php"; </script>';
+						 } else {
+						//Failure
+					  $_SESSION["message"] = "invoice creation failed.";
+					   echo '<script>window.location="purchase_invoice.php"; </script>';
+						 }
+		    
+		}
+		
+		//read function is used to display distributer name in purchase invoice record
+		public function read(){
+				$stmt = $this->conn->prepare("SELECT distributer.name,distributer.id,
+				purchase.id,purchase.date,purchase.comment FROM distributors AS distributer INNER JOIN purchase_invoice AS purchase ON distributer.id=purchase.distributer_id ORDER BY purchase.id DESC") or die($this->conn->error);
+
 				if($stmt->execute()){
 					$result = $stmt->get_result();
 					return $result;
 				}
 		}	
 		//read function is used to display distributer name in purchase invoice record
-
 		public function readDistributers(){
 				$stmt = $this->conn->prepare("SELECT * FROM distributors") or die($this->conn->error);
 				if($stmt->execute()){
@@ -40,6 +51,7 @@
 					return $result;
 				}
 			  }
+
 		 // delete purchase_invoice
 		public function delete_purchase_invoice($purchase_invoice_id){
 			$delete = "DELETE FROM purchase_invoice WHERE id = {$purchase_invoice_id}";
@@ -52,8 +64,8 @@
 				//Failure
 				  $_SESSION["message"] = "Purchase Invoice deleted  failed.";
 				  redirect_to("purchase_invoice.php");
-				}
-		    }
+      }
+}
 		 // fetch data of selected department
 		public function selected_department($department_id){
 			$stmt = $this->conn->prepare("SELECT * FROM department WHERE id = {$department_id}") 
