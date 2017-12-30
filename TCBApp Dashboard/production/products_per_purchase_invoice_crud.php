@@ -7,26 +7,28 @@
 			    }
 		
 		//insert array 
-		public function insertArray($invoice_id,$product_id,$exp_starting,$exp_ending,$purchase_price,$sale_price,$imei,$length)
+		public function insertArray($purchase_invoice_id,$product_id,$exp_starting,$exp_ending,$original_price,$discount_per_item,$net_discount,$net_total,$purchase_price,$sale_price,$imei,$length)
 		{
-	
         for($i=0; $i< $length; $i++)
 		{
-		$query = "INSERT INTO products_per_purchase_invoice VALUES(null,'$invoice_id','$product_id[$i]','$imei[$i]','$exp_starting[$i]',
-		                                            '$exp_ending[$i]','$purchase_price[$i]','$sale_price[$i]')";
+		$query = "INSERT INTO products_per_purchase_invoice VALUES(null,'$purchase_invoice_id','$product_id[$i]','$exp_starting[$i]','$exp_ending[$i]','$original_price','$discount_per_item','$net_discount','$net_total','$purchase_price[$i]','$sale_price[$i]','$imei')";											
 		$result = $this->conn->query($query);
 		}
-		if(!$result)
-			{
-				echo "<br>";
-				echo "something wrong!";	
-			}else
-			{
-				echo "data inserted";
-			}
+		 if($result){
+				//Success
+				$_SESSION["message"] = "Products added against purchase invoice successfully."; ?>
+					<script>
+					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $invoice_id;?>";
+					</script>
+		 <?php }else{
+					$_SESSION["message"] = "Products added against purchase invoice failed."; ?>
+					<script>
+					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $invoice_id;?>";
+					</script>
 			
+		<?php
+		 }
 		}
-		
 		//product reads in select box
 		public function readProducts(){
 				$stmt = $this->conn->prepare("SELECT * FROM products") or die($this->conn->error);
@@ -38,8 +40,8 @@
 		  
 		//products per invoice read query display in record table
 			  	public function readProductsPerInvoice($invoice_id){
-				$stmt = $this->conn->prepare("SELECT product.product_name,product.id,invoice.purchase_invoice_id, invoice.product_id,invoice.imei,invoice.expiry_starting_date,invoice.expiry_ending_date,invoice.purchase_price,
-				invoice.sale_price FROM products AS product INNER JOIN products_per_purchase_invoice AS invoice ON product.id=invoice.product_id WHERE invoice.purchase_invoice_id = $invoice_id ORDER BY invoice.purchase_invoice_id DESC ") or die($this->conn->error);
+				$stmt = $this->conn->prepare("SELECT product.product_name,product.id,invoice.purchase_invoice_id, invoice.product_id,invoice.expiry_starting_date,invoice.expiry_ending_date,invoice.original_price,
+				invoice.discount_per_item,invoice.purchase_price,invoice.sale_price,invoice.imei FROM products AS product INNER JOIN products_per_purchase_invoice AS invoice ON product.id=invoice.product_id WHERE invoice.purchase_invoice_id = $invoice_id ORDER BY invoice.purchase_invoice_id DESC ") or die($this->conn->error);
 				if($stmt->execute()){
 					$result = $stmt->get_result();
 					return $result;
