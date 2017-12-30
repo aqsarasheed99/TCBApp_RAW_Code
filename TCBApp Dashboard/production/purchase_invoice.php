@@ -45,16 +45,13 @@
                     <div class="clearfix"></div>
                 </div>
 				<div class="x_content">
+					<?php echo message();?>
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr >
 						  <th>Invoice Id</th>
 						  <th>Distributor Name</th>
 						  <th>Date</th>
-						  <th>Amount Paid</th>
-						  <th>Amount Payable</th>
-						  <th>Discount Received</th>
-						  <th>Net Total</th>
 						  <th>Comment</th>
 						  <th>Update</th>
 						  <th>Remove</th>
@@ -73,21 +70,9 @@
 								</a>						
 								</td>
 								
-								<td align="center"><?php echo $fetch['name'];?>                   						
-								</td>
-								
-								<td align="center"><?php echo $fetch['date'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['amount_paid'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['amount_payable'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['discount_received'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['net_total'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['comment'];?>						
-								</td>
+								<td align="center"><?php echo $fetch['name'];?></td>
+							    <td align="center"><?php echo $fetch['date'];?>	</td>
+							    <td align="center"><?php echo $fetch['comment'];?>	</td>
 								<td align="center">
 									<a href="edit_department.php?department_id=<?php echo $fetch['id'];?>" >
 										<i class="glyphicon glyphicon-edit"></i> 
@@ -128,19 +113,19 @@
                          <label class="control-label col-md-3 col-sm-3 col-xs-12"> Distributers Name <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-										<select class="form-control" name="distributer_id">
-												<?php 
-															   $connection = new crudop();
-															   $reads = $connection->readDistributers();
-															   while($fetchs = $reads->fetch_array()){
-															 ?>
-												<option	value="<?php echo $fetchs["id"]; ?>">
-															   <?php echo $fetchs["name"]; ?>	
-												</option>
-												<?php } ?>
-										</select>
-                      </div>
-			    </div>
+						<select class="form-control" name="distributer_id">
+							<?php 
+								  $connection = new crudop();
+								  $reads = $connection->readDistributers();
+								  while($fetchs = $reads->fetch_array()){
+											?>
+									<option	value="<?php echo $fetchs["id"]; ?>">
+												   <?php echo $fetchs["name"]; ?>	
+									</option>
+									<?php } ?>
+						</select>
+			  </div>
+			</div>
 				<div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date <span class="required">*</span>
                         </label>
@@ -149,36 +134,12 @@
                         </div>
                 </div>					
 			    <div class="form-group">
-				    <label class="control-label col-md-3 col-sm-3 col-xs-12">Amount Paid<span class="required">*</span></label>
+					<label class="control-label col-md-3 col-sm-3 col-xs-3">Comment<span class="required">*</span></label>
 					<div class="col-md-7 col-sm-7 col-xs-12">
-						<input type="text" name="amount_paid" placeholder="Amount Paid"required="required" class="form-control col-md-7 col-xs-12">
-				    </div>
-			    </div>
-			    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Amount Payable<span class="required">*</span></label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                         <input type="text" name="amount_payable"class="form-control col-md-7 col-xs-12" placeholder="Amount Payable"required="required" >
-                        </div>
-                      </div>
-					  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Discount Received<span class="required">*</span></label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                        <input type="text" name="discount_received" class="form-control col-md-7 col-xs-12" placeholder="Discount Received"  required="required">                       
-						</div>
-                      </div>
-					  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Net Total<span class="required">*</span></label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                        <input type="text" name="net_total" id="net_total"class="form-control col-md-7 col-xs-12" placeholder="Net Total" required="required">                     
-						</div>
-                      </div> 
-					  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Comment<span class="required">*</span></label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                        <textarea name="comment" id="comment"class="form-control col-md-7 col-xs-12" required="required"> 
-						</textarea>                    
-						</div>
-                      </div> 
+					<textarea name="comment" id="comment"class="form-control col-md-7 col-xs-12" required="required"> 
+					</textarea>                    
+					</div>
+                </div> 
                 <div class="form-group">
                         <div class="col-md-7 col-sm-7 col-xs-12 col-md-offset-3"><br/>
 						    <button type="submit" class="btn btn-success">Submit</button>

@@ -8,9 +8,9 @@
 		public function __construct(){
 			 $this->connect();
 			    }
-		public function insert($distributer_id,$date,$amount_paid,$amount_payable,$discount_received,$net_total,$comment)
+		public function insert($distributer_id,$date,$comment)
 		{
-			$distributer = "INSERT INTO purchase_invoice VALUES(null,$distributer_id,'$date',$amount_paid,$amount_payable, $discount_received,$net_total,'$comment')";
+			$distributer = "INSERT INTO purchase_invoice VALUES(null,$distributer_id,'$date','$comment')";
 			$insert = $this->conn->query($distributer);
 			  if($insert){
 						//Success
@@ -26,9 +26,8 @@
 		
 		//read function is used to display distributer name in purchase invoice record
 		public function read(){
-				$stmt = $this->conn->prepare("SELECT distributer.name,distributer.id,purchase.id,purchase.date,purchase.amount_paid,purchase.amount_payable,
-									purchase.discount_received,purchase.net_total,purchase.comment FROM distributors AS distributer INNER JOIN purchase_invoice AS purchase ON
-									distributer.id=purchase.distributer_id ORDER BY purchase.id DESC") or die($this->conn->error);
+				$stmt = $this->conn->prepare("SELECT distributer.name,distributer.id,
+				purchase.id,purchase.date,purchase.comment FROM distributors AS distributer INNER JOIN purchase_invoice AS purchase ON distributer.id=purchase.distributer_id ORDER BY purchase.id DESC") or die($this->conn->error);
 				if($stmt->execute()){
 					$result = $stmt->get_result();
 					return $result;
