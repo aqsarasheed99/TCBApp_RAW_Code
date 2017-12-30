@@ -1,11 +1,10 @@
 <!-- database connection -->
 <?php
-
 class db_connection{	
 public $host = "localhost";
 public $user = "root";
 public $pass = "";
-public $dbname = "mobile_app";
+public $dbname = "mobile_application";
 public $conn;
 
 
