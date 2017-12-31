@@ -155,7 +155,7 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h3 class="modal-title" align="center">Update Product</h3>
+			  <h3 class="modal-title" align="center">Update Distributer</h3>
 			</div>
 			<div class="modal-body">
 						<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"

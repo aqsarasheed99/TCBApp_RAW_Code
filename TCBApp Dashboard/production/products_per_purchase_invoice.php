@@ -76,16 +76,16 @@
 							   while($fetch = $read->fetch_array()){
 							 ?>
 							<tr>	
-								<td align="center">
+								<td>
 								<?php echo $fetch['purchase_invoice_id'];?>					
 								</td>
-								<td align="center"><?php echo $fetch['product_name'];?>                   						
+								<td><?php echo $fetch['product_name'];?>                   						
 								</td>
-								<td align="center"><?php echo $fetch['expiry_starting_date'];?>						
+								<td><?php echo $fetch['expiry_starting_date'];?>						
 								</td>
-								<td align="center"><?php echo $fetch['expiry_ending_date'];?>						
+								<td><?php echo $fetch['expiry_ending_date'];?>						
 								</td>
-								<td align="center"><?php echo $fetch['original_price'];?>						
+								<td><?php echo $fetch['original_price'];?>						
 								</td>
 								<td align="center"><?php echo $fetch['discount_per_item'];?>						
 								</td>
