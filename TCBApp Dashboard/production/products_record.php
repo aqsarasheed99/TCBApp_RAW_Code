@@ -1,19 +1,11 @@
-
-<?php       include_once 'session.php';
-            include_once ('header.php'); 
-     ?>
-
-
-        <!-- page content -->
+<?php  include_once 'session.php';?>
+<?php    include_once ('header.php');  ?>
  <!-- page content -->
-
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-
                 <h3>Products Record</h3>
-
               </div>
 
               <div class="title_right">
@@ -27,17 +19,13 @@
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Product Record</h2>
-
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> + Add Product
 					</button>
-
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -57,9 +45,7 @@
                   </div>
 				   <div class="x_content"><br/>
 				       <?php echo message();?>
-
-           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-
+                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr >
                   <th align="center">Product Name</th>
@@ -67,7 +53,7 @@
 				  <th align="center">Update</th>
 				  <th align="center">Delete</th>
                 </tr>
-             </thead>
+                </thead>
 						<tbody>
 						
 						   <?php include_once 'product_CRUD.php';?>
@@ -95,7 +81,6 @@
 						?>	 
 						</tbody>
                 </table>
-
                     
                   </div>
                 </div>
@@ -104,6 +89,7 @@
           </div>
         </div>
         <!-- /page content -->
+			
 		<!--first model to insert new product -->
 	 <div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
@@ -215,6 +201,5 @@
 	  </div> 
 	</div>
 <!--model content close --> 
-
 
 <?php include_once ('footer.php'); ?>        
