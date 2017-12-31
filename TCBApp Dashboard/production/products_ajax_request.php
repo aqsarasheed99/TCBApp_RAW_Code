@@ -12,7 +12,7 @@
 		$imei               = $_POST['imei_no'];
 		
 		//var_dump('$net_total');
-		echo $net_total;
+		//echo $net_total;
 			
 		//count function count the length of the array
 		$length = count($product_id);
