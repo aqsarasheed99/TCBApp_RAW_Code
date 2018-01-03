@@ -80,13 +80,15 @@
 						<td align="center"><?php echo $fetch['phone_no'];?>    </td>
 						<td align="center"><?php echo $fetch['address'];?>     </td>
 						<td align="center">
-						<a href="edit_distributor.php?distributor_id=<?php echo $fetch['id'];?>" >
-							<i class="glyphicon glyphicon-edit"></i> 
-							</a>
+				            <i class="glyphicon glyphicon-edit"  data-toggle="modal" data-target="#modalEdit"></i>
 						</td>
+						<?php
+								global $distributer_id;
+									$distributer_id = $fetch['id'];
+						?>
 						
 						<td align="center"><a href="delete_distributor.php?
-						distributor_id=<?php echo $fetch['id'];?>" onclick="return Confirm('Are you sure?');">
+						distributor_id=<?php echo $distributer_id;?>" onclick="return Confirm('Are you sure?');">
 							<i class="glyphicon glyphicon-remove-circle"></i></a>
 						</td>
 					</tr>
@@ -167,14 +169,102 @@
                           <button class="btn btn-primary" type="reset">Reset</button>
                           
                         </div>
-                      </div>
-
-                    </form>
+                </div>
+            </form>
         </div>
       </div>
     </div>
   </div> 
 </div>
+<!--model content close --> 
+ <?php
+				//update distributor against selected id
+				   if(isset($_POST["submit"])){
+					   $name        = $_POST["name"];
+					   $father_name = $_POST["father_name"];
+					   $cnic        = $_POST["cnic"];
+					   $phone_no    = $_POST["phone_no"];
+					   $address     = $_POST["address"];
+					   
+				   $crud = new crudOp();
+				   $crud->update($distributer_id,$name,$father_name,$cnic,$phone_no,$address);
+				  }
+	           ?> 
+<!--second model to edit distributer detail-->
+	 <div class="modal fade" id="modalEdit" role="dialog">
+		<div class="modal-dialog">
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h3 class="modal-title" align="center">Update Distributer</h3>
+			</div>
+			<div class="modal-body">
+						<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST">
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> Name <span class="required">*</span>
+                        </label>
+						<?php
+								// fetch data of selected product_id
+								  $select = new crudOp();
+								  $read = $select->fetch_selected_id($distributer_id); 
+								  $fetch = $read->fetch_array();
+						     ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="name" id="name" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch["name"]?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> Father Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="father_name" id="father_name" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch["father_name"]?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">CNIC</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="cnic" class="form-control" data-inputmask="'mask' : '99999-9999999-9'"value="<?php echo $fetch["cnic"]?>">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true" ></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone No.</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="phone_no" class="form-control"   data-inputmask="'mask' : '(+99)999-9999999'" value="<?php echo $fetch["phone_no"]?>">
+                          <span class="fa fa-user form-control-feedback right"  aria-hidden="true"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Address<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea class="form-control" name="address" rows="3"><?php echo $fetch["address"];?></textarea>
+                        </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+						  <button type="submit" name="submit" value="submit" class="btn btn-success">Submit</button>
+                          <button class="btn btn-danger" type="button">Cancel</button>
+                          <button class="btn btn-primary" type="reset">Reset</button>
+                          
+                        </div>
+                      </div>
+
+                    </form>
+			</div>
+		  </div>
+		</div>
+	  </div> 
+	</div>
 <!--model content close --> 
 
 <?php include_once ('footer.php'); ?>        

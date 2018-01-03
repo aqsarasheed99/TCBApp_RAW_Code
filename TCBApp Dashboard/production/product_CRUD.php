@@ -61,11 +61,11 @@
 
 			 if($update){
 					//Success
-				$_SESSION["message"] = "Product Deleted Successfully.";
+				$_SESSION["message"] = "Product updated Successfully.";
 			    echo '<script>window.location="products_record.php"; </script>';
 				  } else {
 					//Failure
-					$_SESSION["message"] = "Product Deleted  Failed.";
+					$_SESSION["message"] = "Product updation  Failed.";
 				    echo '<script>window.location="products_record.php"; </script>';
 					}
 				  }

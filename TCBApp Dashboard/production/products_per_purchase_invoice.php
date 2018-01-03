@@ -31,98 +31,195 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-				  <!--button for add new invoice -->
-				  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">+ Add Products</button>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-				    
-					<?php echo message();?>
-                    
-					<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                      <thead>
-                        <tr >
-						  <th>Purchase Invoice Id</th>
-						  <th>Products Name</th>
-						  <th>Expiry Starting Date</th>
-						  <th>Expiry Ending Date</th>
-						  <th>Original Price</th>
-						  <th>Discount Per Item</th>
-						  <th>Purchase price</th>
-						  <th>Sale Price</th>
-						  <th>IMEI</th>
-						  <th>Update</th>
-						  <th>Remove</th>
-						</tr>
-                      </thead>
-                      <tbody>
-                         <?php 
-							   $conn = new crudop();
-							   $read = $conn->readProductsPerInvoice($invoice_id);
-							   while($fetch = $read->fetch_array()){
-							 ?>
-							<tr>	
-								<td>
-								<?php echo $fetch['purchase_invoice_id'];?>					
-								</td>
-								<td><?php echo $fetch['product_name'];?>                   						
-								</td>
-								<td><?php echo $fetch['expiry_starting_date'];?>						
-								</td>
-								<td><?php echo $fetch['expiry_ending_date'];?>						
-								</td>
-								<td><?php echo $fetch['original_price'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['discount_per_item'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['purchase_price'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['sale_price'];?>						
-								</td>
-								<td align="center"><?php echo $fetch['imei'];?>						
-								</td>
-								<td align="center">
-									<a href="edit_products_per_purchase_invoice.php?purchase_invoice_id = <?php echo $invoice_id; ?>">
-										<i class="glyphicon glyphicon-edit"></i> 
-										</a>
-								</td>
-						
-								<td align="center">
-									<a href="delete_department.php?department_id=<?php echo $fetch['id'];?>">
-										<i class="glyphicon glyphicon-remove-circle"></i>
-									</a>
-								</td>
-							</tr>
-						<?php
+				
+				<!-- first page of tab -->
+				
+                <div class="tab">
+					  <button class="tablinks" onclick="openTab(event, 'products_per_purchase_invoice')">Add Products Per Invoice</button>
+					  <button class="tablinks" onclick="openTab(event, 'accounts_detail')">Accounts Detail</button>
+					 
+				</div>
+					<div id="products_per_purchase_invoice" class="tabcontent">
+						<div class="x_title" >
+						  
+						  <!--button for add new invoice -->
+						  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">+ Add Products</button>
+							<ul class="nav navbar-right panel_toolbox">
+							  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+							  </li>
+							  <li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+								<ul class="dropdown-menu" role="menu">
+								  <li><a href="#">Settings 1</a>
+								  </li>
+								  <li><a href="#">Settings 2</a>
+								  </li>
+								</ul>
+							  </li>
+							</ul>
+							<div class="clearfix"></div>
+						  </div>
+						  <div class="x_content">
+							
+							<?php echo message();?>
+							
+							<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+							  <thead>
+								<tr >
+								  <th>Purchase Invoice Id</th>
+								  <th>Products Name</th>
+								  <th>Expiry Starting Date</th>
+								  <th>Expiry Ending Date</th>
+								  <th>Original Price</th>
+								  <th>Discount Per Item</th>
+								  <th>Purchase price</th>
+								  <th>Sale Price</th>
+								  <th>IMEI</th>
+								  <th>Update</th>
+								  <th>Remove</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								 <?php 
+									   $conn = new crudop();
+									   $read = $conn->readProductsPerInvoice($invoice_id);
+									   while($fetch = $read->fetch_array()){
+									 ?>
+									<tr>	
+										<td>
+										<?php echo $fetch['purchase_invoice_id'];?>					
+										</td>
+										<td><?php echo $fetch['product_name'];?>                   						
+										</td>
+										<td><?php echo $fetch['expiry_starting_date'];?>						
+										</td>
+										<td><?php echo $fetch['expiry_ending_date'];?>						
+										</td>
+										<td><?php echo $fetch['original_price'];?>						
+										</td>
+										<td align="center"><?php echo $fetch['discount_per_item'];?>						
+										</td>
+										<td align="center"><?php echo $fetch['purchase_price'];?>						
+										</td>
+										<td align="center"><?php echo $fetch['sale_price'];?>						
+										</td>
+										<td align="center"><?php echo $fetch['imei'];?>						
+										</td>
+										<td align="center">
+											<a href="edit_products_per_purchase_invoice.php?purchase_invoice_id = <?php echo $invoice_id; ?>">
+												<i class="glyphicon glyphicon-edit"></i> 
+												</a>
+										</td>
+								
+										<td align="center">
+											<a href="delete_department.php?department_id=<?php echo $fetch['id'];?>">
+												<i class="glyphicon glyphicon-remove-circle"></i>
+											</a>
+										</td>
+									</tr>
+								<?php
+									}
+								?>	
+							  </tbody>
+							</table>	
+					</div>
+				</div>	
+				<div id="accounts_detail" class="tabcontent">
+				<?php
+						$conn = new crudop();
+						$count = $conn->countRows($invoice_id);
+						$row = $count->fetch_assoc();
+							if($row > 0){
+								$discount =$conn->sumOfDiscountOfProducts($invoice_id);
+								$fetch_discount = $discount->fetch_assoc();
+								$read = $conn->sumOfPurchasePrice($invoice_id);
+								$fetch_purchase_price = $read->fetch_assoc();
+								
 							}
-						?>	
-                      </tbody>
-                    </table>	
-                    </div>
-		</div>
-	</div>
-</div>
+				?>
+				  <h3>Accounts Detail</h3>
+				  <!-- account detail form start -->
+				    <form  action="" method="post" class="form-horizontal form-label-left">
+              						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Total Amount of Products <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							<input type="text" name="net_total_of_products" id="net_total_of_products"placeholder="net total"
+							value="<?php echo $fetch_purchase_price["purchasePrice"];?>"  readonly="true" required="required" class="form-control col-md-6">
+							</div>
+						</div>
+						
+						<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"> Discount Per Products<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								 <input type="text" name="products_discount" id="products_discount" value="<?php echo $fetch_discount["productsDiscount"];?>"  
+								 placeholder="Products Discount"  readonly="true"
+								 required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"> Discount Per Invoice <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							   
+							   <input type="radio" name="discount_of_invoice" id="percentage_of_invoice" value="percentage_of_invoice" checked>By Percentage
+							
+							   <input type="radio" name="discount_of_invoice" id="amount_of_invoice"  value="amount_of_invoice"> By Amount		
+							  
+							  <input type="text" name="discount_of_invoice" id="discount_of_invoice"  placeholder="Discount" required="required" value="0" class="form-control col-md-6 col-xs-12">  			  
+							
+							</div>	   
+						</div>
+						
+						<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"> Net Discount<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								 <input type="text" name="net_discount_of_invoice" id="net_discount_of_invoice"  placeholder="net discount"value=""  readonly="true"
+								 required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Net Total Of Invoice <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							<input type="text" name="net_total" id="net_total"placeholder="net total" value="" readonly="true" required="required" class="form-control col-md-6">
+							</div>
+						</div>
+						<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"> Amount Paid<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								 <input type="text" name="amount_paid" id="amount_paid" onfocus="discountOnInvoice();readOnlyNetDiscount();" placeholder="Amount Paid" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+						</div>	
+						<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">Amount Payable<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								 <input type="text" name="amount_payable" id="amount_payable" placeholder="Amount Payable" required="required" value=""   readonly="true" class="form-control col-md-7 col-xs-12">
+								</div>
+						</div>	<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">Balance<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								 <input type="text" name="balance" id="balance" onfocus="readOnlyAmountPayable();" placeholder="Balance" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+						</div>			
+						<div class="form-group">
+								<div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-4"><br/>
+									<input type="button" name="submit" class="btn btn-success btn-block" id="insert"  value="Insert"/>
+									<br>
+								</div>
+						</div>					  
+                    </form>
+					<!--accounts detail form closed -->
+				</div>
+            </div>
+	    </div>
+    </div>
 </div>
 </div>
  <!-- Modal content-->
   <div class="modal fade" id="myModal" role="dialog" >
     <div class="modal-dialog" style=" width: 950px;margin: auto;">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" >
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<h3 class="modal-title" align="center">Add Products</h3>
         </div>
@@ -169,29 +266,30 @@
 				<div class="form-group">
 				    <label class="control-label col-md-4 col-sm-4 col-xs-12"> Discount <span class="required">*</span></label>
 					<div class="col-md-7 col-sm-7 col-xs-12">
-					  
-					  <input type="text" name="discount" id="discount" placeholder="Discount" required="required"class="form-control col-md-6 col-xs-12">  
-					 
-					 <input type="radio" name="discountType" id="percentage" onchange="getPurchasePrice();readOnlyPurchasePrice();"  
-					  required="required" value="percentage" >By Percentage
+					   
+					   <input type="radio" name="discountType" id="percentage"  required="required" value="percentage" checked >By Percentage
 					
-					 <input type="radio" name="discountType" id="amount" onchange="getPurchasePrice();readOnlyPurchasePrice();" 
-					  required="required" value="amount"> By Amount					  
+					  <input type="radio" name="discountType" id="amount"  required="required" value="amount"> By Amount		
+					  
+					  <input type="text" name="discount" id="discount"  placeholder="Discount" required="required" value="0" class="form-control col-md-6 col-xs-12">  
+					 
+								  
 					</div>
 					   
 			    </div>
 				 <div class="form-group">
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">Purchase Price<span class="required">*</span></label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                         <input type="text" name="purchase_price" id="purchase_price" placeholder="Purchase Price"  readonly="true"
+                         <input type="text" name="purchase_price" id="purchase_price"  placeholder="Purchase Price"  readonly="true"
 						 required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                  </div>
 				 
+				 
 				 <div class="form-group">
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">Sale Price<span class="required">*</span></label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                         <input type="text" name="sale_price" id="sale_price" placeholder="Sale Price"required="required" class="form-control col-md-7 col-xs-12">
+                         <input type="text" name="sale_price" id="sale_price" onfocus="getProductsPerPurchasePrice();readOnlyPurchasePrice();" placeholder="Sale Price"required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                  </div>
 				<div class="form-group">
@@ -228,6 +326,21 @@
 			<br/>
 		</div>
 		<script>
+		<!-- Tab function -->
+		function openTab(evt, value) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(value).style.display = "block";
+			evt.currentTarget.className += " active";
+			}
+				
 			//this method print the table heading
 			$("#table_heading").click(function(){
 				$("#mydata").show();
@@ -249,10 +362,9 @@
 			let salePriceArr = new Array();
 			let imeiArr = new Array();
 			
-		    let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice, imei, 
-			     netTotal=0, netDiscount=0, discountType,discountReceived=0;
+		    let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice, imei, discountReceived=0;
 				
-		function getPurchasePrice()
+		function getProductsPerPurchasePrice()
 		{
 			originalPrice = parseInt(document.getElementById("original_price").value);
 				
@@ -272,19 +384,17 @@
 			            
 						purchasePrice = originalPrice - discount;
 					    discountReceived = discount;
-				    }
-				    
+				    } 
 				else{
 					 purchasePrice = originalPrice;
 				}
 				//alert(purchasePrice);			
 		}
-		function readOnlyPurchasePrice(){
+		function readOnlyPurchasePrice()
+		{
 			let purchaseValue = document.getElementById('purchase_price');
 				purchaseValue.value=purchasePrice;	
-			
 		}
-		
     //imei function		  
 		  function getImeiValue()
 			{    
@@ -297,7 +407,6 @@
 					imeiArr.push(val);  
 					document.getElementById("imei").value = "";	
 			}
-
 	//display table
 			function insert()
 			{
@@ -335,10 +444,11 @@
 					row.insertCell(5).innerHTML= discountReceived;
 					row.insertCell(6).innerHTML= purchasePrice;	 
 					row.insertCell(7).innerHTML= salePrice;	 
-					row.insertCell(8).innerHTML= val;	
+					row.insertCell(8).innerHTML= val;
 			val = null;	
 			       
 			}
+			
 			let product,expS, expE,originalP,discountP, pPrice, sPrice,imeiNo;
 			function objVariables(){
 			            product     = productIdArr;
@@ -349,39 +459,94 @@
 						pPrice      = purchasePriceArr;
 						sPrice      = salePriceArr;
 						imeiNo      = imeiArr;	
-						
-						for(let i=0; i<purchasePriceArr.length; i++)
-				          {
-				         netTotal = netTotal+parseInt(purchasePriceArr[i]);
-				          }
-				       
-					   for(let i=0; i<discountArr.length; i++)
-				         {
-				        netDiscount = netDiscount+parseInt(discountArr[i]);
-				         }
-					
-					//alert(netTotal);
-					//alert(netDiscount);
 			}			
 				
 				$(document).ready(function(){
 					$('#submit').click(function(){
-						
 					        $.ajax({
 							url:"products_ajax_request.php",
 							method: "POST",
-							data:{purchase_invoice_id:purchaseInvoiceId, product_id:product ,exp_starting:expS, exp_ending:expE, original_price:originalP,discount_per_item:discountP, net_discount:netDiscount, net_total:netTotal, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo},
+							data:{purchase_invoice_id:purchaseInvoiceId, product_id:product ,exp_starting:expS, exp_ending:expE, original_price:originalP,discount_per_item:discountP, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo},
                             
 							success:function(message)
 							{
 								//alert(message);
-								$(".modal-title").html(message);
+								$(".x_content").html(message);
 							}
 							}); 						
 				        }); // click event
 				});// ready 
-		    </script>
-			
+				
+				//variables declaration of accounts detail
+				let netTotalOfProducts=0, discountPerProducts=0,netTotalOfInvoice=0, discountValue, discountPerInvoice=0, discountReceivedOnInvoice=0,
+				    amountPaid,amountPayable,valueOfAmountPayable, netDiscount,valueOfNetDiscount,valueOfNetTotal; 
+				//function for whole discount per invoice including products discount
+				function discountOnInvoice()
+						{
+							netTotalOfProducts = parseInt(document.getElementById("net_total_of_products").value);
+							discountPerProducts  = parseInt(document.getElementById("products_discount").value);
+									
+								if(document.getElementById('percentage_of_invoice').checked)
+									{
+										//discountValue get from text box that we received on invoice
+										discountValue = parseInt(document.getElementById("discount_of_invoice").value);
+										
+										discountReceivedOnInvoice = parseInt((netTotalOfProducts*discountValue)/100);
+										
+										netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice;
+									}
+								
+								else if(document.getElementById('amount_of_invoice').checked)
+									{
+										discountValue = parseInt(document.getElementById("discount_of_invoice").value);
+	
+										discountReceivedOnInvoice  = discountValue;
+										
+										netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice;
+									} 
+								
+								else{
+									    netTotalOfInvoice = netTotalOfProducts;
+								}		
+						}
+				
+				function readOnlyNetDiscount()
+				{
+				    valueOfNetDiscount = document.getElementById('net_discount_of_invoice');
+					
+					    netDiscount = discountPerProducts + discountReceivedOnInvoice;
+						
+						valueOfNetDiscount.value=netDiscount;
+					
+				    valueOfNetTotal = document.getElementById('net_total');
+					valueOfNetTotal.value=netTotalOfInvoice;
+						
+				}
+				function readOnlyAmountPayable(){
+					
+				    amountPaid = parseInt(document.getElementById('amount_paid').value);
+				    amountPayable = netTotalOfInvoice-amountPaid;
+					    
+				    valueOfAmountPayable = document.getElementById('amount_payable');
+						    valueOfAmountPayable.value=amountPayable;
+				}
+				//ajax code for insert accounts detail against invoice
+				$(document).ready(function(){
+					$('#insert').click(function(){
+					        $.ajax({
+							url:"ajax_request_accounts.php",
+							method: "POST",
+							data:{purchase_invoice_id:purchaseInvoiceId, net_total_of_products:netTotalOfProducts, discount_per_products:discountPerProducts, discount_received_on_invoice:discountReceivedOnInvoice, net_discount:netDiscount, net_total_of_invoice:netTotalOfInvoice, amount_paid:amountPaid,amount_payable:amountPayable},
+							success:function(message)
+							{
+								//alert(message);
+								$("#accounts_detail").html(message);
+							}
+							}); 						
+				        }); // click event 
+				});// ready 
+				
+</script>	
         </div> 
         </div>
     </div>

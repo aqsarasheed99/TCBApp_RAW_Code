@@ -65,12 +65,16 @@
 							 <tr>	
 								<td align="center"><?php echo $fetch['product_name'];?>  </td>
 								<td align="center"><?php echo $fetch['manufacturer'];?>  </td>
+								
 								<td align="center">
 									<i class="glyphicon glyphicon-edit"  data-toggle="modal" data-target="#modalEdit"></i>
 								</td>
-								
+								<?php 
+									global $product_id;
+									$product_id = $fetch['id'];
+								?>
 								<td align="center"><a href="delete_product.php?product_id=
-									   <?php echo $fetch['id'];?>" onclick="return Confirm('Are you sure?');"> 
+									   <?php echo $product_id;?>" onclick="return Confirm('Are you sure?');"> 
 									<i class="glyphicon glyphicon-remove-circle">
 									</i></a>
 								</td>
@@ -129,7 +133,6 @@
 							  
 							</div>
 						  </div>
-
 						</form>
 			</div>
 		  </div>
@@ -155,7 +158,7 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h3 class="modal-title" align="center">Update Distributer</h3>
+			  <h3 class="modal-title" align="center">Update Products Detail</h3>
 			</div>
 			<div class="modal-body">
 						<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"

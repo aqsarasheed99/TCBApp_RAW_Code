@@ -7,23 +7,23 @@
 			    }
 		
 		//insert array 
-		public function insertArray($purchase_invoice_id,$product_id,$exp_starting,$exp_ending,$original_price,$discount_per_item,$net_discount,$net_total,$purchase_price,$sale_price,$imei,$length)
+		public function insertArray($purchase_invoice_id,$product_id,$exp_starting,$exp_ending,$original_price,$discount_per_item,$purchase_price,$sale_price,$imei,$length)
 		{
         for($i=0; $i< $length; $i++)
 		{
-		$query = "INSERT INTO products_per_purchase_invoice VALUES(null,'$purchase_invoice_id','$product_id[$i]','$exp_starting[$i]','$exp_ending[$i]','$original_price','$discount_per_item','$net_discount','$net_total','$purchase_price[$i]','$sale_price[$i]','$imei')";											
+		$query = "INSERT INTO products_per_purchase_invoice VALUES(null,'$purchase_invoice_id','$product_id[$i]','$exp_starting[$i]','$exp_ending[$i]','$original_price[$i]','$discount_per_item[$i]','$purchase_price[$i]','$sale_price[$i]','$imei[$i]')";											
 		$result = $this->conn->query($query);
 		}
 		 if($result){
 				//Success
 				$_SESSION["message"] = "Products added against purchase invoice successfully."; ?>
 					<script>
-					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $invoice_id;?>";
+					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $purchase_invoice_id;?>";
 					</script>
 		 <?php }else{
 					$_SESSION["message"] = "Products added against purchase invoice failed."; ?>
 					<script>
-					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $invoice_id;?>";
+					    window.location="products_per_purchase_invoice.php?invoice_id=<?php echo $purchase_invoice_id;?>";
 					</script>
 			
 		<?php
@@ -47,6 +47,34 @@
 					return $result;
 				}
 		}	
+		//count the row of purchase_price column 
+		public function countRows($invoice_id)
+		{
+			$count = $this->conn->prepare("SELECT COUNT(purchase_price) FROM products_per_purchase_invoice WHERE purchase_invoice_id=$invoice_id") or die($this->conn->error);
+				if($count->execute()){
+					$result = $count->get_result();
+					return $result;
+				}
+		}
+		
+		//sum of purchase invoice column
+				public function sumOfPurchasePrice($invoice_id){
+				$stmt = $this->conn->prepare("SELECT  SUM(purchase_price) AS purchasePrice FROM products_per_purchase_invoice WHERE purchase_invoice_id=$invoice_id") or die($this->conn->error);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					return $result;
+				}
+			}
+       
+	   //sum of discount_per_item column
+				public function sumOfDiscountOfProducts($invoice_id){
+				$stmt = $this->conn->prepare("SELECT  SUM(discount_per_item) AS productsDiscount FROM products_per_purchase_invoice WHERE purchase_invoice_id=$invoice_id") or die($this->conn->error);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					return $result;
+				}
+			}
+
 		//read product name against id
 			public function readProductName($product_id){
 				$stmt = $this->conn->prepare("SELECT product_name FROM products WHERE id=$product_id") or die($this->conn->error);
