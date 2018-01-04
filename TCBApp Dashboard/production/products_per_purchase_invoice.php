@@ -60,9 +60,6 @@
 							<div class="clearfix"></div>
 						  </div>
 						  <div class="x_content">
-							
-							<?php echo message();?>
-							
 							<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 							  <thead>
 								<tr >
@@ -124,6 +121,7 @@
 							</table>	
 					</div>
 				</div>	
+				<!--second tab-->
 				<div id="accounts_detail" class="tabcontent">
 				<?php
 						$conn = new crudop();
@@ -133,11 +131,12 @@
 								$discount =$conn->sumOfDiscountOfProducts($invoice_id);
 								$fetch_discount = $discount->fetch_assoc();
 								$read = $conn->sumOfPurchasePrice($invoice_id);
-								$fetch_purchase_price = $read->fetch_assoc();
-								
+								$fetch_purchase_price = $read->fetch_assoc();	
 							}
 				?>
+				
 				  <h3>Accounts Detail</h3>
+				  
 				  <!-- account detail form start -->
 				    <form  action="" method="post" class="form-horizontal form-label-left">
               						
@@ -193,14 +192,10 @@
 						<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12">Amount Payable<span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-								 <input type="text" name="amount_payable" id="amount_payable" placeholder="Amount Payable" required="required" value=""   readonly="true" class="form-control col-md-7 col-xs-12">
+								 <input type="text" name="amount_payable" id="amount_payable" onfocus="readOnlyAmountPayable();" placeholder="Amount Payable" required="required" value=""   readonly="true" class="form-control col-md-7 col-xs-12">
 								</div>
-						</div>	<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12">Balance<span class="required">*</span></label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-								 <input type="text" name="balance" id="balance" onfocus="readOnlyAmountPayable();" placeholder="Balance" required="required" class="form-control col-md-7 col-xs-12">
-								</div>
-						</div>			
+						</div>	
+								
 						<div class="form-group">
 								<div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-4"><br/>
 									<input type="button" name="submit" class="btn btn-success btn-block" id="insert"  value="Insert"/>
@@ -485,6 +480,7 @@
 						{
 							netTotalOfProducts = parseInt(document.getElementById("net_total_of_products").value);
 							discountPerProducts  = parseInt(document.getElementById("products_discount").value);
+							
 									
 								if(document.getElementById('percentage_of_invoice').checked)
 									{

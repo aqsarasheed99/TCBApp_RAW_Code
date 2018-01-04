@@ -46,13 +46,20 @@
                 </div>
 				<div class="x_content">
 					<?php echo message();?>
-                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+					<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr >
 						  <th>Invoice Id</th>
 						  <th>Distributor Name</th>
 						  <th>Date</th>
 						  <th>Comment</th>
+						  <th>Net Total Of Products</th>
+						  <th>Discount Of Products</th>
+						  <th>Discount Of Invoice</th>
+						  <th>Net Discount</th>
+						  <th>Amount Paid</th>
+						  <th>Amount Payable</th>
+						  <th>Balance</th>
 						  <th>Update</th>
 						  <th>Remove</th>
 						</tr>
@@ -73,6 +80,13 @@
 								<td align="center"><?php echo $fetch['name'];?></td>
 							    <td align="center"><?php echo $fetch['date'];?>	</td>
 							    <td align="center"><?php echo $fetch['comment'];?>	</td>
+							    <td align="center"><?php echo $fetch['net_total_of_products'];?>	</td>
+							    <td align="center"><?php echo $fetch['products_discount'];?>	</td>
+							    <td align="center"><?php echo $fetch['discount_of_invoice'];?>	</td>
+							    <td align="center"><?php echo $fetch['net_discount'];?>	</td>
+							    <td align="center"><?php echo $fetch['net_total'];?>	</td>
+							    <td align="center"><?php echo $fetch['amount_paid'];?>	</td>
+							    <td align="center"><?php echo $fetch['amount_payable'];?>	</td>
 								<td align="center">
 									<a href="edit_department.php?department_id=<?php echo $fetch['id'];?>" >
 										<i class="glyphicon glyphicon-edit"></i> 
