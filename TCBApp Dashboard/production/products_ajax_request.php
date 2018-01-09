@@ -4,11 +4,10 @@
 		$exp_starting       = $_POST['exp_starting'];
 	    $exp_ending         = $_POST['exp_ending'];
 	    $original_price     = $_POST['original_price'];
-	    $discount_per_item  = $_POST['discount_per_item'];
-		//$net_discount       = $_POST['net_discount'];	
-		//$net_total          = $_POST['net_total'];	
+	    $discount_per_item  = $_POST['discount_per_item'];	
 		$purchase_price     = $_POST['purchase_price'];
 		$sale_price         = $_POST['sale_price'];
+		$status             = $_POST['status'];
 		$imei               = $_POST['imei_no'];
 		
 		//var_dump('$net_total');
@@ -22,7 +21,7 @@
 		include "products_per_purchase_invoice_crud.php";
 		//insert query
 		$insert = new crudop();
-		$insert->insertArray($purchase_invoice_id,$product_id,$exp_starting,$exp_ending,$original_price,$discount_per_item,$purchase_price,$sale_price,$imei,$length);
+		$insert->insertArray($purchase_invoice_id,$product_id,$exp_starting,$exp_ending,$original_price,$discount_per_item,$purchase_price,$sale_price,$imei,$status,$length);
 
 		// $conn = new crudop();
 		// $read = $conn->sumOfPurchasePrice($purchase_invoice_id );

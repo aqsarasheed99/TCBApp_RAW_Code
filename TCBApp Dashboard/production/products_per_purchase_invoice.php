@@ -71,6 +71,7 @@
 								  <th>Discount Per Item</th>
 								  <th>Purchase price</th>
 								  <th>Sale Price</th>
+								  <th>Status</th>
 								  <th>IMEI</th>
 								  <th>Update</th>
 								  <th>Remove</th>
@@ -94,16 +95,18 @@
 										</td>
 										<td><?php echo $fetch['original_price'];?>						
 										</td>
-										<td align="center"><?php echo $fetch['discount_per_item'];?>						
+										<td><?php echo $fetch['discount_per_item'];?>						
 										</td>
-										<td align="center"><?php echo $fetch['purchase_price'];?>						
+										<td><?php echo $fetch['purchase_price'];?>						
 										</td>
-										<td align="center"><?php echo $fetch['sale_price'];?>						
+										<td><?php echo $fetch['sale_price'];?>						
 										</td>
-										<td align="center"><?php echo $fetch['imei'];?>						
+										<td><?php echo $fetch['status'];?>						
+										</td>
+										<td><?php echo $fetch['imei'];?>						
 										</td>
 										<td align="center">
-											<a href="edit_products_per_purchase_invoice.php?purchase_invoice_id = <?php echo $invoice_id; ?>">
+											<a href="edit_products_per_purchase_invoice.php?id=<?php echo $fetch['id'];?>">
 												<i class="glyphicon glyphicon-edit"></i> 
 												</a>
 										</td>
@@ -288,6 +291,19 @@
                         </div>
                  </div>
 				<div class="form-group">
+					<label class="control-label col-md-4 col-sm-4 col-xs-12"> Status<span class="required">*</span>
+					</label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+							<select class="form-control" name="status" id="status">
+									<option	value="Available">	Available
+									</option>
+									<option	value="Sold">Sold
+									</option>
+						    </select>
+                      </div>
+			    </div>
+				 
+				<div class="form-group">
                         <label class="control-label col-md-4 col-sm-4 col-xs-12">IMEI <span class="required">*</span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
@@ -315,6 +331,7 @@
 					<th> Discount              </th>
 					<th> Purchase Price        </th>
 					<th> Selling Price         </th>
+					<th> Status                </th>
 					<th> IMEI                  </th>
 				</tr>
 			</table>
@@ -355,9 +372,10 @@
 			let discountArr = new Array();
 			let purchasePriceArr = new Array();
 			let salePriceArr = new Array();
+			let statusArr = new Array();
 			let imeiArr = new Array();
 			
-		    let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice, imei, discountReceived=0;
+		    let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice,status, imei, discountReceived=0;
 				
 		function getProductsPerPurchasePrice()
 		{
@@ -411,6 +429,7 @@
 				expEnding        = document.getElementById("expiry_ending_date").value;
 				//purchasePrice    = document.getElementById("purchase_price").value;
 				salePrice        = document.getElementById("sale_price").value;
+				status        = document.getElementById("status").value;
 			
 				// push is the method of array in javascript ,..and this method push the new value in array 
 					productIdArr.push(productId);
@@ -420,7 +439,7 @@
 					discountArr.push(discountReceived);
 					purchasePriceArr.push(purchasePrice); 
 					salePriceArr.push(salePrice);
-					//imeiArr.push(imei);
+					statusArr.push(status);
 					
 				let table = document.getElementById("myTableData");
 					
@@ -439,12 +458,13 @@
 					row.insertCell(5).innerHTML= discountReceived;
 					row.insertCell(6).innerHTML= purchasePrice;	 
 					row.insertCell(7).innerHTML= salePrice;	 
-					row.insertCell(8).innerHTML= val;
+					row.insertCell(8).innerHTML= status;	 
+					row.insertCell(9).innerHTML= val;
 			val = null;	
 			       
 			}
 			
-			let product,expS, expE,originalP,discountP, pPrice, sPrice,imeiNo;
+			let product,expS, expE,originalP,discountP, pPrice, sPrice,imeiNo,productStatus;
 			function objVariables(){
 			            product     = productIdArr;
 						expS        = expStartingArr;
@@ -453,6 +473,7 @@
 						discountP   = discountArr;
 						pPrice      = purchasePriceArr;
 						sPrice      = salePriceArr;
+						productStatus = statusArr;
 						imeiNo      = imeiArr;	
 			}			
 				
@@ -461,7 +482,8 @@
 					        $.ajax({
 							url:"products_ajax_request.php",
 							method: "POST",
-							data:{purchase_invoice_id:purchaseInvoiceId, product_id:product ,exp_starting:expS, exp_ending:expE, original_price:originalP,discount_per_item:discountP, purchase_price:pPrice,sale_price:sPrice,imei_no:imeiNo},
+							data:{purchase_invoice_id:purchaseInvoiceId, product_id:product ,exp_starting:expS, exp_ending:expE, original_price:originalP,discount_per_item:discountP, purchase_price:pPrice,sale_price:sPrice,
+							status:productStatus,imei_no:imeiNo},
                             
 							success:function(message)
 							{

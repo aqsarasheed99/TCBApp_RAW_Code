@@ -1,6 +1,27 @@
+<?php include_once 'session.php';?>
 <?php include_once ('header.php'); ?>
 <?php include 'products_per_purchase_invoice_crud.php';?>
-
+        <?php if (isset($_GET["id"])) 
+			  {
+			  $id =$_GET["id"] ;
+			   }
+		?>
+		<?php
+				//update distributor against selected id
+				   if(isset($_POST["submit"])){
+					   $product_id         = $_POST["product_id"];
+					   $expiry_starting    = $_POST["expiry_starting_date"];
+					   $expiry_ending      = $_POST["expiry_ending_date"];
+					   $original_price     = $_POST["original_price"];
+					   $discount_per_item  = $_POST["discount_per_item"];
+					   $purchase_price     = $_POST["purchase_price"];
+					   $sale_price         = $_POST["sale_price"];
+					   $imei               = $_POST["imei"];
+					   
+				   $crud = new crudOp();
+				   $crud->updateProductsPerPurchaseInvoice($id,$product_id,$expiry_starting,$expiry_ending,$original_price,$discount_per_item,$purchase_price,$sale_price,$imei);
+				  }
+	    ?> 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -42,6 +63,12 @@
                 </div>
 				<div class="x_content">
 					  <!--form start -->
+					<?php 
+									   $conn = new crudop();
+									   $read_data = $conn->displayPurchaseInvoiceData($id);
+									   while($fetch_data = $read_data->fetch_array()){
+									 ?>
+					  
 			<form  action="" method="post" class="form-horizontal form-label-left">
 					<div class="form-group">
 						<label class="control-label col-md-4 col-sm-4 col-xs-12"> Products Name <span class="required">*</span>
@@ -49,10 +76,9 @@
 							<div class="col-md-5 col-sm-5 col-xs-12">
 								<select class="form-control">
 										<?php 
-													   $connection = new crudop();
-													   $read = $connection-> readProducts();
+													   $read = $conn-> readProducts();
 													   while($fetch = $read->fetch_array()){
-													 ?>
+										?>
 										<option	value="<?php echo $fetch["id"]; ?>">
 													   <?php echo $fetch["product_name"]; ?>	
 										</option>
@@ -65,37 +91,50 @@
 							<label class="control-label col-md-4 col-sm-4 col-xs-12">Expiry Starting Date <span class="required">*</span>
 							</label>
 							<div class="col-md-5 col-sm-5 col-xs-12">
-								<input type="date"  class="form-control col-md-6">
+								<input type="date"  class="form-control col-md-6" value="<?php echo $fetch_data["expiry_starting_date"]; ?>">
 							</div>
 					</div>					
 
 					<div class="form-group">
 						<label class="control-label col-md-4 col-sm-4 col-xs-12">Expiry Ending Date <span class="required">*</span></label>
 						<div class="col-md-5 col-sm-5 col-xs-12">
-						<input type="date" class="form-control col-md-6">
+						<input type="date" class="form-control col-md-6" value="<?php echo $fetch_data["expiry_ending_date"]; ?>"	>
 						</div>
 					</div>
 				  
 					<div class="form-group">
-							<label class="control-label col-md-4 col-sm-4 col-xs-12">Purchase Price<span class="required">*</span></label>
+							<label class="control-label col-md-4 col-sm-4 col-xs-12">Original Price<span class="required">*</span></label>
 							<div class="col-md-5 col-sm-5 col-xs-12">
-							 <input type="text" class="form-control col-md-7 col-xs-12">
+							 <input type="text" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch_data["original_price"]; ?>">
+							</div>
+					 </div>
+					 <div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-12">Discount Per Item<span class="required">*</span></label>
+							<div class="col-md-5 col-sm-5 col-xs-12">
+							 <input type="text" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch_data["discount_per_item"]; ?>">
 							</div>
 					 </div>
 					 
 					 <div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-12">purchase Price<span class="required">*</span></label>
+							<div class="col-md-5 col-sm-5 col-xs-12">
+							 <input type="text" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch_data["purchase_price"]; ?>">
+							</div>
+					 </div> 
+					 <div class="form-group">
 							<label class="control-label col-md-4 col-sm-4 col-xs-12">Sale Price<span class="required">*</span></label>
 							<div class="col-md-5 col-sm-5 col-xs-12">
-							 <input type="text" class="form-control col-md-7 col-xs-12">
+							 <input type="text" class="form-control col-md-7 col-xs-12" value="<?php echo $fetch_data["sale_price"]; ?>">
 							</div>
 					 </div>
 					<div class="form-group">
 							<label class="control-label col-md-4 col-sm-4 col-xs-12">IMEI <span class="required">*</span>
 							</label>
 							<div class="col-md-5 col-sm-5 col-xs-12">
-								<input type="text"  class="form-control col-md-6">
+								<input type="text"  class="form-control col-md-6" value="<?php echo $fetch_data["imei"]; ?>	">
 							</div>
 					</div>	
+					<?php } ?>
 						 
 					<div class="form-group">
 							<div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4"><br/>

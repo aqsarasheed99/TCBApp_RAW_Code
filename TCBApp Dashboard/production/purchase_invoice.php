@@ -76,7 +76,6 @@
 								<?php echo $fetch['id'];?>
 								</a>						
 								</td>
-								
 								<td align="center"><?php echo $fetch['name'];?></td>
 							    <td align="center"><?php echo $fetch['date'];?>	</td>
 							    <td align="center"><?php echo $fetch['comment'];?>	</td>

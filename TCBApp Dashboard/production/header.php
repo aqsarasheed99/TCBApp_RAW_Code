@@ -94,9 +94,7 @@
               <div class="clearfix"></div>
             </div>
             <!-- /menu profile quick info -->
-
             <br />
-
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -107,6 +105,12 @@
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li>
+                    </ul>
+                  </li>
+				  <li><a href="#"><i class="fa fa-home"></i> Stock <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+                      <li><a href="available_stock.php">Available</a></li>
+                      <li><a href="sold_stock.php">Sold</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
