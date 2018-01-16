@@ -1,7 +1,7 @@
 <?php include_once 'session.php';?>
 <?php include_once ('header.php'); ?>
 <?php include 'products_per_purchase_invoice_crud.php';?>
-        <?php if (isset($_GET["id"])) 
+        <?php if(isset($_GET["id"])) 
 			  {
 			  $id =$_GET["id"] ;
 			   }

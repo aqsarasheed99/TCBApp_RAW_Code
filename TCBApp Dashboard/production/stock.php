@@ -7,7 +7,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Purchase Invoice Record</h3>
+                <h3>Available Stock</h3>
               </div>
 
               <div class="title_right">
@@ -26,9 +26,6 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-				  <!--button for add new invoice -->
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"> + Add Purchase Invoice 
-					</button> 
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -45,7 +42,6 @@
                     <div class="clearfix"></div>
                 </div>
 				<div class="x_content">
-					<?php echo message();?>
 					<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr >
@@ -92,7 +88,7 @@
 										</a>
 									</td>
 								<td align="center">
-									<a href="delete_purchase_invoice.php?invoice_id=<?php echo $fetch['id'];?>" onclick="return Confirm('Are you sure?'); ">
+									<a href="delete_department.php?department_id=<?php echo $fetch['id'];?>" onclick="return Confirm('Are you sure?'); ">
 										<i class="glyphicon glyphicon-remove-circle"></i>
 									</a>
 								</td>
@@ -108,64 +104,4 @@
 		</div>
 	</div>
 </div>
- <!--model -->
- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" align="center">Add invoice</h3>
-        </div>
-        <div class="modal-body">
-			
-			<form  action="purchase_invoice_insert.php" method="post" class="form-horizontal form-label-left">
-            
-                <div class="form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12"> Distributers Name <span class="required">*</span>
-                        </label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-						<select class="form-control" name="distributer_id">
-							<?php 
-								  $connection = new crudop();
-								  $reads = $connection->readDistributers();
-								  while($fetchs = $reads->fetch_array()){
-											?>
-									<option	value="<?php echo $fetchs["id"]; ?>">
-												   <?php echo $fetchs["name"]; ?>	
-									</option>
-									<?php } ?>
-						</select>
-			  </div>
-			</div>
-				<div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date <span class="required">*</span>
-                        </label>
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                          <input type="date" name="date" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                </div>					
-			    <div class="form-group">
-					<label class="control-label col-md-3 col-sm-3 col-xs-3">Comment<span class="required">*</span></label>
-					<div class="col-md-7 col-sm-7 col-xs-12">
-					<textarea name="comment" id="comment"class="form-control col-md-7 col-xs-12" required="required"> 
-					</textarea>                    
-					</div>
-                </div> 
-                <div class="form-group">
-                        <div class="col-md-7 col-sm-7 col-xs-12 col-md-offset-3"><br/>
-						    <button type="submit" class="btn btn-success">Submit</button>
-                            <button class="btn btn-primary" type="reset">Reset</button>
-						    <button type="button" class="btn btn-danger " data-dismiss="modal" class="cancelbtn">Cancel</button>
-						  <br>
-                        </div>
-                </div>					  
-           </form>
-        </div>
-      </div>
-    </div>
-  </div> 
-</div>
-<!--model content close --> 
 <?php include_once ('footer.php'); ?>        

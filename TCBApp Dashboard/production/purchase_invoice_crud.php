@@ -42,17 +42,17 @@
 				}
 			  }
 		 // delete department
-		public function delete_department($department_id){
-			$delete = "DELETE FROM department WHERE id = {$department_id}";
+		public function delete_purchase_invoice($invoice_id){
+			$delete = "DELETE FROM purchase_invoice WHERE id = {$invoice_id}";
 			$deleted = $this->conn->query($delete);
 			if($deleted){
 				//Success
-					$_SESSION["message"] = "department deleted successfully.";
-					redirect_to("department_record.php");
+					$_SESSION["message"] = "purchase invoice deleted successfully.";
+					 echo '<script>window.location="purchase_invoice.php"; </script>';
 				} else {
 				//Failure
-				  $_SESSION["message"] = "department deleted  failed.";
-				  redirect_to("department_record.php");
+				  $_SESSION["message"] = "purchase invoice deleted  failed.";
+				   echo '<script>window.location="purchase_invoice.php"; </script>';
 				}
 		    }
 		 // fetch data of selected department

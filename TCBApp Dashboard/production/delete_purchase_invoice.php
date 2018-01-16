@@ -1,7 +1,7 @@
 <?php 
      include_once 'purchase_invoice_crud.php';
-	  if (isset($_GET["purchase_invoice_id"])) {
-		$purchase_invoice_id =$_GET["purchase_invoice_id"] ;
+	  if (isset($_GET["invoice_id"])) {
+		$purchase_invoice_id =$_GET["invoice_id"] ;
 	  }
 	?>
  <?php 

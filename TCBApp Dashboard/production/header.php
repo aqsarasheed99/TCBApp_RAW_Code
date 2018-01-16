@@ -68,6 +68,9 @@
     padding: 6px 12px;
     border-top: none;
 }
+	#display_for{
+		display:none;
+	}
 	</style>
 </head>
 

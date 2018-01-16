@@ -110,7 +110,7 @@
 			 // update products per perchase invoice data
 			public function updateProductsPerPurchaseInvoice($id,$product_id,$expiry_starting,$expiry_ending,$original_price,$discount_per_item,$purchase_price,$sale_price,$imei)
 			{
-				$updates ="UPDATE products_per_purchase_invoice SET product_id =$product_id,expiry_starting_date='{$expiry_starting}',expiry_ending_date='{$expiry_ending}',original_price=$original_price,discount_per_item =$discount_per_item,purchase_price=$purchase_price,sale_price=$sale_price,imei=imei WHERE id =$id";
+				$updates ="UPDATE products_per_purchase_invoice SET product_id =$product_id,expiry_starting_date='{$expiry_starting}',expiry_ending_date='{$expiry_ending}',original_price=$original_price,discount_per_item=$discount_per_item,purchase_price=$purchase_price,sale_price=$sale_price,imei=$imei WHERE id=$id";
 				$update = $this->conn->query($updates);
 
 				 if($update){
