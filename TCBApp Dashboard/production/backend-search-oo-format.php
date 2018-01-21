@@ -13,7 +13,7 @@ $term = $mysqli->real_escape_string($_REQUEST['term']);
  
 if(isset($term)){
     // Attempt select query execution
-    $sql = "SELECT * FROM distributors WHERE name LIKE '" . $term . "%'";
+    $sql = "SELECT * FROM customer WHERE name LIKE '" . $term . "%'";
     if($result = $mysqli->query($sql)){
         if($result->num_rows > 0){            
             while($row = $result->fetch_array()){

@@ -14,11 +14,11 @@
 			 if($insert){
 				//Success
 			  $_SESSION["message"] = "Customer created successfully.";
-			   echo '<script>window.location="sale_invoice.php"; </script>';
+			   echo '<script>window.location="index.php"; </script>';
 				 } else {
 				//Failure
 			  $_SESSION["message"] = "Customer creation failed.";
-			   echo '<script>window.location="sale_invoice.php"; </script>';
+			   echo '<script>window.location="index.php"; </script>';
 				 }
 		    }
 			//fetch all record from distributor table

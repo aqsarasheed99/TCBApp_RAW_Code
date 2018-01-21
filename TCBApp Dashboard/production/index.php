@@ -13,7 +13,7 @@
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
 					
-         
+					<?php echo message();?>	
                   </div>
                 </div>
               </div>
@@ -78,7 +78,7 @@
 		</div>
 			
 	</div>
-	
+	  
 	<div class="col-md-3 col-sm-3 col-xs-10">
         <div class="x_panel">
             <div class="x_title">
@@ -86,7 +86,7 @@
 				<label><h4>Receipt</h4></label>
 					
 			</div>
-				
+			
 			<div class="x_content">
 			    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal_customer"> + Add Customer 
 				</button>
