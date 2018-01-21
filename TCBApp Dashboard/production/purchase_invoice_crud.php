@@ -55,15 +55,13 @@
 				   echo '<script>window.location="purchase_invoice.php"; </script>';
 				}
 		    }
-		 // fetch data of selected department
-		public function selected_department($department_id){
-			$stmt = $this->conn->prepare("SELECT * FROM department WHERE id = {$department_id}") 
-			        or die($this->conn->error);
-			if($stmt->execute()){
-				$result = $stmt->get_result();
-				return $result;
-			}
-		}
+		 public function read_customer(){
+			$stmt = $this->conn->prepare("SELECT * FROM customer WHERE name  LIKE 'a%'") or die($this->conn->error);
+			  if($stmt->execute()){
+					$result = $stmt->get_result();
+					return $result;
+			    }
+		    }
 		// update department
 		public function update($department_id , $department_name){
 			$updates = "UPDATE department SET department_name = '{$department_name}' WHERE id = {$department_id}";

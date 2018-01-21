@@ -12,10 +12,18 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+						
+				    <div style="width:245px;"class="x_panel">
+						<div class="x_title">
+							<h5>Receipt</h5>
+						</div>
+						
+						<div class="x_content">
+							<p id="detail"></p>
+							<p id="discount"></p>
+						</div>	
+					</div>
+                    
                   </div>
                 </div>
               </div>
@@ -29,7 +37,8 @@
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">IMEI NO:<span class="required"></span>
                         </label>
                         <div class="col-md-7 col-sm-7 col-xs-12">
-                          <input type="number" name="imei" id="imei" class="form-control col-md-7 col-xs-12">
+                          <input type="number" name="imei" id="imei"  value=""class="form-control col-md-7 
+						  col-xs-12">
                         </div> 
 						</div>
                     <ul class="nav navbar-right panel_toolbox">
@@ -47,11 +56,13 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
+				
 				<div class="x_content">
 					<div id="display_form">
 						<table id="myTableData" id="datatable-responsive"  class="table table-striped " cellspacing="0" width="100%">
-								
-									<tr>
+								<thead>
+									<tr >
+									  <th>Index</th>
 									  <th>Invoice Id</th>
 									  <th>Products Name</th>
 									  <th>Expiry Starting</th>
@@ -59,22 +70,25 @@
 									  <th>Sale Price</th>
 									  <th>Status</th>
 									  <th>IMEI NO </th>
-									  <th>Discount</th>
+									  <th>Discount(%)</th>
 									  <th>Delete</th>
 									</tr>
-						</table>	
+								</thead>
+						</table>
 						
-				    </div><!--form div close  -->
-				
 			</div>     
 			</div>	
 		</div>
 	</div>
 </div>
 </div>
-<script>
+<script>	
+						//this method print the table heading
+						$("#imei").change(function(){
+							$("#display_form").show();
+						});
 						
-				var imeiNo;
+				var imeiNo,rowCount,sumOfSalePrice=0,sumOfDiscount=0,sumOfFinalPrice=0;
 			 //array declaration 
 				let purchaseInvoiceIdArr = new Array();
 				let productIdArr = new Array();
@@ -84,27 +98,29 @@
 				let statusArr = new Array();
 				let imeiArr = new Array();
 				let discountArr = new Array();
+				let finalPriceArr = new Array();
 				
 			$('#imei').change(function(event){
 				//get all input value in variable 
 				 imeiNo = document.getElementById('imei').value;
-				
 				// this function is used to send data without page reloade
 					event.preventDefault();
 				
 				$.ajax({
-				    method:"POST",
-				    url:"sale_invoice_form.php",
-				    //take a imei number from user and send this data through ajax request
-				    data:{imei_no:imeiNo},
-					dataType:'text',
-					success:function(data) 
-					{
-						$("#myTableData").append(data);
-						
-					//let json = JSON.stringify(eval('(' + data + ')'));					  
-						//data = $.parseJSON(json);
-					   
+				  method:"POST",
+				  url:"ajax_request_fetch_data_sale_invoice.php",
+				  //take a imei number from user and send this data through ajax request
+				  data:{imei_no:imeiNo}
+				})
+				//after success 
+				.done(function(data){
+					//parseJSON convert the string data into javascript object
+					  //"data" include all the data that we recieve  
+				    let json = JSON.stringify(eval('(' + data + ')'));					  
+						data = $.parseJSON(json);
+						//data=$.parseJSON(data);						
+						  
+					  //we get the invoice id from the object(data)
 					    purchaseInvoiceId = data.purchase_invoice_id;
 					    productId         = data.product_name;
 					    expiryStarting    = data.expiry_starting_date;
@@ -112,8 +128,31 @@
 					    salePrice         = data.sale_price;
 					    status            = data.status;
 					    imeiVal           = data.imei;
+					  		
+						//table array 
+						let table = document.getElementById("myTableData");
+				
+						//count the table row
+						rowCount = table.rows.length;
 						
-					  //push data into array
+						//insert the new row
+						let row = table.insertRow(rowCount);
+						
+					
+						//insert the coulmn against the row
+						row.insertCell(0).innerHTML= rowCount;
+						row.insertCell(1).innerHTML= purchaseInvoiceId;
+						row.insertCell(2).innerHTML= productId;
+						row.insertCell(3).innerHTML= expiryStarting;
+						row.insertCell(4).innerHTML= expiryEnding;
+						row.insertCell(5).innerHTML= salePrice;
+						row.insertCell(6).innerHTML= status;	 
+						row.insertCell(7).innerHTML= imeiVal;
+						row.insertCell(8).innerHTML= "<input style='width:150px;border-radius:8px;'value='0' type='text' id='discount' onchange='discountValue(this.value,this);'>";
+						
+						row.insertCell(9).innerHTML= "<input style='height:30px;border-radius:5px;'type='button' class='btn btn-danger' value='Delete' onclick='deleteRecord(this);'>";
+						
+						//push data into array
 						purchaseInvoiceIdArr.push(purchaseInvoiceId);
 						productIdArr.push(productId);
 						expStartingArr.push(expiryStarting);
@@ -122,11 +161,69 @@
 						statusArr.push(status);
 						imeiArr.push(imeiVal);
 						
-						document.getElementById("imei").value = "";
-						//document.getElementById('myTableData').innerHTML=purchaseInvoiceId;
+						document.getElementById("imei").value = "";	
+						
+							finalPriceArr.push(salePrice);
+						
+							sumOfSalePrice = parseInt(sumOfSalePrice)+ parseInt(salePrice);
 							
-					}
-				})
+						    sumOfFinalPrice = sumOfSalePrice;
+							
+							document.getElementById('detail').innerHTML="Total:"+sumOfSalePrice;
+							document.getElementById('discount').innerHTML="Discount:"+ sumOfDiscount + "<br/>Net Total:"+sumOfFinalPrice;
+				});
 			});
+			
+			function discountValue(value,index)
+						{
+							var a,discount=0 ;
+                            a = index.parentNode.parentNode.rowIndex;
+				            a = a-1;
+							discount = (salePriceArr[a]*value)/100;
+							//alert(salePriceArr[a]);
+						
+							//final price is a sale price after deduction discount 
+							//var finalPrice = salePriceArr[a]-discount;
+								
+							discountArr.push(discount);
+							
+							sumOfDiscount = sumOfDiscount + discount;
+							
+							sumOfFinalPrice = sumOfFinalPrice - discount;
+							
+							document.getElementById('discount').innerHTML="Discount:" + sumOfDiscount + "</br>Net Total:" + sumOfFinalPrice;
+						}
+						
+			function deleteRecord(value)
+			{
+				alert('Are you sure you want to delete it?');
+				
+				var i = value.parentNode.parentNode.rowIndex;
+				document.getElementById("myTableData").deleteRow(i);
+				var j=i-1;
+				
+				var price = salePriceArr[j];
+				var finalP = finalPriceArr[j];
+				var discountVal = discountArr[j];
+				purchaseInvoiceIdArr.splice(j,1);
+				productIdArr.splice(j,1);
+				expStartingArr.splice(j,1);
+				expEndingArr.splice(j,1);
+				salePriceArr.splice(j,1);
+				statusArr.splice(j,1);
+				imeiArr.splice(j,1);
+				discountArr.splice(j,1);
+				finalPriceArr.splice(j,1);
+				//alert(imeiArr);
+				
+				sumOfSalePrice = parseInt(sumOfSalePrice)- parseInt(price);
+				sumOfFinalPrice = parseInt(sumOfFinalPrice)- parseInt(finalP)+ parseInt(discountVal);
+				sumOfDiscount = parseInt(sumOfDiscount)- parseInt(discountVal);
+				
+				document.getElementById('detail').innerHTML="Total:"+sumOfSalePrice;
+				document.getElementById('discount').innerHTML="Discount:"+ sumOfDiscount + "<br/>Net Total:"+sumOfFinalPrice;
+				
+				//alert(salePriceArr.length);
+			}
 	</script>
 <?php include_once ('footer.php'); ?>        
