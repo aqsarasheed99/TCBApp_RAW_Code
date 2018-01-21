@@ -5,7 +5,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Products Record</h3>
+                <h3>Product Record</h3>
               </div>
 
               <div class="title_right">
@@ -101,7 +101,7 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h3 class="modal-title" align="center">Add Distributer</h3>
+			  <h3 class="modal-title" align="center">Add Product</h3>
 			</div>
 			<div class="modal-body">
 						<form id="demo-form2" action="insert_product.php" data-parsley-validate class="form-horizontal form-label-left"
@@ -158,7 +158,7 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h3 class="modal-title" align="center">Update Products Detail</h3>
+			  <h3 class="modal-title" align="center">Update Product Detail</h3>
 			</div>
 			<div class="modal-body">
 						<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"

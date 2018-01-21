@@ -141,7 +141,10 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  
+                  </li>
+					 <li><a href="index.php"><i class="fa fa-home"></i>Home</a>
+                  </li> 
+				  
 				   <li><a href="#"><i class="fa fa-home"></i> Distributor <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
                         <li><a href="distributor_record.php">Distributor Record</a></li>
@@ -159,7 +162,7 @@
                       <li><a href="purchase_invoice.php">Purchase Invoice Record</a></li>
                     </ul>
                   </li>
-					 <li><a href="index.php"><i class="fa fa-home"></i> Sale Invoice</a>
+					 <li><a href="sale_invoice.php"><i class="fa fa-home"></i> Sale Invoice</a>
                   </li> 
 				  
 				    <li><a href="#"><i class="fa fa-home"></i> Stock <span class="fa fa-chevron-down"></span></a>
@@ -207,7 +210,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt="">Rana Faraz
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -233,7 +236,19 @@
                       <a>
                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
+                          <span>Rana Faraz</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>Rana Faraz</span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -257,19 +272,7 @@
                       <a>
                         <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
+                          <span>Rana Farazs</span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
